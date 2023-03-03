@@ -1,7 +1,34 @@
-085-NbTi-NbTi:
-    outer conductor: 0.85e-3
-    dielectric: 0.46e-3
-    inner conductor: 0.2e-3
+# Cable parameters are taken from CryoCoax datasheets:
+# https://cryocoax.com/wp-content/uploads/2020/07/CryoCoaxCableSelector_Editable_ForScreen-Email-General-2.pdf
+
+034-NbTi-NbTi:
+    outer diameter: 0.90e-3
+    dielectric diameter: 0.660e-3
+    inner diameter: 0.203e-3
     outer material: NbTi
     dielectric material: Teflon
     inner material: NbTi
+
+034-SS-SS:
+    outer diameter: 0.86e-3
+    dielectric diameter: 0.660e-3
+    inner diameter: 0.203e-3
+    outer material: 304_stainless_steel
+    dielectric material: Teflon
+    inner material: 304_stainless_steel
+
+086-NbTi-NbTi:
+    outer diameter: 2.19e-3
+    dielectric diameter: 1.67e-3
+    inner diameter: 0.510e-3
+    outer material: NbTi
+    dielectric material: Teflon
+    inner material: NbTi
+
+086-SS-SS:
+    outer diameter: 2.197e-3
+    dielectric diameter: 1.67e-3
+    inner diameter: 0.510e-3
+    outer material: 304_stainless_steel
+    dielectric material: Teflon
+    inner material: 304_stainless_steel

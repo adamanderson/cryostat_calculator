@@ -1,0 +1,7 @@
+085-NbTi-NbTi:
+    outer conductor: 0.85e-3
+    dielectric: 0.46e-3
+    inner conductor: 0.2e-3
+    outer material: NbTi
+    dielectric material: Teflon
+    inner material: NbTi

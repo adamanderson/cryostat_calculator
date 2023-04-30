@@ -31,52 +31,17 @@ plt.title('Reproducing Fig. 1 of Krinner, et al.')
 plt.tight_layout()
 plt.savefig('krinner_figure_test.png', dpi=200)
 
+# SLIM cryostat wiring parameters
+Tstage = [290, 45, 3.3, 0.7, 0.1, 0.7, 3.3, 45, 290]
+cable_type = ['034-SS-SS', '034-SS-SS', '034-SS-SS', '034-SS-SS',
+              '034-NbTi-NbTi', '034-NbTi-NbTi', '034-SS-SS', '034-SS-SS']
+cable_length = [0.3, 0.5, 0.3, 0.5, 0.5, 0.3, 0.5, 0.3]
 
-# calculate power for SLIM design
-print('300K -> 50K (SS)')
-wire = CoaxWiring('034-SS-SS', 0.3)
-wire_power = wire.power(40, 290)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('50K -> 4K (SS)')
-wire = CoaxWiring('034-SS-SS', 0.5)
-wire_power = wire.power(3.2, 40)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('4K -> 1K (SS)')
-wire = CoaxWiring('034-SS-SS', 0.3)
-wire_power = wire.power(0.8, 3.2)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('1K -> 100mK (SS)')
-wire = CoaxWiring('034-SS-SS', 0.5)
-wire_power = wire.power(0.1, 0.8)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('100mK -> 1K (NbTi)')
-wire = CoaxWiring('034-NbTi-NbTi', 0.5)
-wire_power = wire.power(0.1, 0.8)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('1K ->4K (NbTi)')
-wire = CoaxWiring('034-NbTi-NbTi', 0.3)
-wire_power = wire.power(0.8, 3.2)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('4K -> 50K (SS) (update this to silver plated!!)')
-wire = CoaxWiring('034-SS-SS', 0.5)
-wire_power = wire.power(3.2, 40)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
-
-print('50K -> 300K (SS)')
-wire = CoaxWiring('034-SS-SS', 0.3)
-wire_power = wire.power(40, 290)
-print('Loading per wire: {:.2e} W'.format(wire_power))
-print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
+for jcable in np.arange(len(cable_type)):
+    # calculate power for SLIM design
+    print('{}K -> {}K ({}-m length {})'.format(Tstage[jcable], Tstage[jcable+1], cable_length[jcable], cable_type[jcable]))
+    wire = CoaxWiring(cable_type[jcable], cable_length[jcable])
+    wire_power = wire.power(np.min(Tstage[jcable:(jcable+2)]),
+                            np.max(Tstage[jcable:(jcable+2)]))
+    print('Loading per wire: {:.2e} W'.format(wire_power))
+    print('Loading for 9 wires: {:.2e} W\n'.format(wire_power*9))
